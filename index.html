@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Доска объявлений</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Noto+Sans:wght@700&family=Open+Sans&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="headerContent">
+            <div class="logo"></div>
+            <div class="title">Доска объявлений</div>
+            <div class="menu">
+                <input id="main-button" class="but" type="submit" value="Главная">
+                <input id="auth-button" class="but" type="submit" value="Вход">
+                <input id="registration-button" class="but" type="submit" value="Регистрация">
+            </div>
+        </div>
+    </header>
+    <main role="main">
+        <div class="main__container">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+        </div>
+        <div class="modal" id="modal-1">
+            <div class="modal__content">
+                <input class="modal__close-button" type="image" src="img/close-button.svg">
+                <h2 class="modal__title">Вход</h2>
+                <div class="modal__container">
+                    <label for="login"><b>Логин</b></label>
+                    <input class="form_input" type="text" placeholder="Логин" name="login" required>
+                    <label for="psw"><b>Пароль</b></label>
+                    <input class="form_input" type="password" placeholder="Пароль" name="psw" required>
+                    <button class="modal__submit-button" type="submit">Войти</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="modal-2">
+            <div class="modal__content">
+                <input class="modal__close-button" type="image" src="img/close-button.svg">
+                <h2 class="modal__title">Регистрация</h2>
+                <div class="modal__container">
+                    <label for="login"><b>Логин</b></label>
+                    <input class="form_input" type="text" placeholder="Логин" name="login" required>
+                    <label for="login"><b>E-mail</b></label>
+                    <input class="form_input" type="email" placeholder="Логин" name="email" required>
+                    <label for="login"><b>Телефон</b></label>
+                    <input class="form_input" type="tel" placeholder="Логин" name="tel" required>
+                    <label for="psw"><b>Пароль</b></label>
+                    <input class="form_input" type="password" placeholder="Пароль" name="psw" required>
+                    <label for="psw"><b>Повторите пароль</b></label>
+                    <input class="form_input" type="password" placeholder="Пароль" name="psw" required>
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember">  Я даю свое согласие на обработку персональных данных в соответствии с условиями
+                    </label>
+                    <button class="modal__submit-button" type="submit">Войти</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

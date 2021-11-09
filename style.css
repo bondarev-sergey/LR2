@@ -123,10 +123,23 @@ header {
   margin: 10px 0;
   display: inline-block;
   border: 1px solid #ccc;
+  outline: none;
   box-sizing: border-box;
   height: 50px;
   border-radius: 5px;
   font-size: 18px;
+}
+
+.form_input._error {
+  background-color: tomato;
+}
+
+.form_input:required:valid {
+  border: 3px solid rgb(0, 253, 114);
+}
+
+.form_input:required:invalid {
+  border: 3px solid rgb(253, 101, 101);
 }
 
 input[type=checkbox] {

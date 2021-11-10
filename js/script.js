@@ -15,6 +15,14 @@ $(function () {
         $('#modal-1, #modal-2').removeClass('modal_active');
         $('body').removeClass('hidden');
     });
+    $('#other-form-1').click(function () {
+        $('#modal-1').removeClass('modal_active');
+        $('#modal-2').addClass('modal_active');
+    });
+    $('#other-form-2').click(function () {
+        $('#modal-2').removeClass('modal_active');
+        $('#modal-1').addClass('modal_active');
+    });
 });
 
 $('.modal').mouseup(function (e) {
@@ -25,24 +33,45 @@ $('.modal').mouseup(function (e) {
     }
 });
 
-let reg1 = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    reg2 = /^((\+7|7|8)+([0-9]){10})$/
-    reg3 = /(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,})$/
-    reg4 = /[а-яА-Я]{6,30}/
+let reg1 = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+let reg2 = /^((\+7|7|8)+([0-9]){10})$/;
+let reg3 = /(?!^[a-zA-Z]*$){6,}/;
+let reg4 = /[а-яА-Я]{6,30}/;
 
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('registration-form');
-    form.addEventListener('submit', formSend);
+    const registration_form = document.getElementById('registration-form');
+    registration_form.addEventListener('submit', formSend);
 
     async function formSend(e) {
         e.preventDefault();
 
-        let error = formValidate(form);
+        let error = formValidate(registration_form);
+
+        let formData = new FormData(registration_form);
+
+        if (error === 0) {
+            let response = await fetch('https://httpbin.org/post', {
+                method: 'POST',
+                body: formData
+            });
+            if (response.ok) {
+                let result = await response.json();
+                alert('Регистрация прошла успешно');
+                console.log(result.registration_form);
+                registration_form.reset();
+                $('#modal-2').removeClass('modal_active');
+                $('body').removeClass('hidden');
+            } else {
+                alert('Ошибка');
+            }
+        } else {
+            alert('Заполните обязательно поля');
+        }
     }
 
     function formValidate(form) {
         let error = 0;
-        let formReq = document.querySelectorAll('._req');
+        let formReq = form.querySelectorAll('._req');
 
         for (let i = 0; i < formReq.length; i++) {
             const input = formReq[i];
@@ -51,10 +80,12 @@ document.addEventListener('DOMContentLoaded', function () {
             if (input.classList.contains('_email')){
                 if (emailTest(input)){
                     formAddError(input);
+                    alert('email');
                     error++;
                 }
-            }else if (input.getAttribute("type") === "checkbox" && input.checked === false){
+            }else if (input.classList.contains('form_input_checkbox') && input.checked === false){
                 formAddError(input);
+                alert('checkbox');
                 error++;
             }else if (input.value === ''){
                     formAddError(input);
@@ -79,9 +110,22 @@ document.addEventListener('DOMContentLoaded', function () {
                         'мере одного специального символа (символов, отличных от букв и цифр).');
                     error++;
                 }
+            } else if (input.classList.contains('_repeat-psw')) {
+                if (passwordTest(input)){
+                    formAddError(input);
+                    alert('Пароль допускает только не менее 6 символов. Также должен содержать по ' +
+                        'крайней мере одной цифры, заглавной или строчной буквы и по крайней ' +
+                        'мере одного специального символа (символов, отличных от букв и цифр).');
+                    error++;
+                }
+            } else {
+                if (input.value === '') {
+                    formAddError(input);
+                    error++;
+                }
             }
-            if (input.classList.contains('_pass')){
-                if (input.value !== formReq[index+1].value){
+            if (input.classList.contains('_psw')){
+                if (input.value !== formReq[i+1].value){
                     formAddError(input);
                     alert('Пароли должны совпадать');
                     error++;
@@ -89,6 +133,36 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         return error;
+    }
+
+    const auth_form = document.getElementById('auth-form');
+    auth_form.addEventListener('submit', formSendAuth);
+
+    async function formSendAuth(e) {
+        e.preventDefault();
+
+        let error = formValidate(auth_form);
+        console.log(error);
+        let formData = new FormData(auth_form);
+
+        if (error === 0) {
+            let response = await fetch('https://httpbin.org/post', {
+                method: 'POST',
+                body: formData
+            });
+            if (response.ok) {
+                let result = await response.json();
+                alert('Авторизация прошла успешно');
+                console.log(result.auth_form);
+                auth_form.reset();
+                $('#modal-1').removeClass('modal_active');
+                $('body').removeClass('hidden');
+            } else {
+                alert('Ошибка');
+            }
+        } else {
+            alert('Заполните обязательно поля');
+        }
     }
 
     function formAddError(input) {
@@ -112,51 +186,3 @@ document.addEventListener('DOMContentLoaded', function () {
         return !reg3.test(input.value);
     }    
 });
-
-/*email.addEventListener("input", function (event) {
-    if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))) {
-      $('error').addClass('error_active');
-    } else {
-      $('error').removeClass('error_active');
-    }
-});*/
-
-/*login.addEventListener("input", function (event) {
-    if (login.validity.typeMismatch) {
-      login.setCustomValidity("Неправильно введен логин!");
-    } else {
-      login.setCustomValidity("");
-    }
-});
-
-email.addEventListener("input", function (event) {
-    if (email.validity.typeMismatch) {
-      email.setCustomValidity("Неправильно введена электронная почта!");
-    } else {
-      email.setCustomValidity("");
-    }
-});
-
-tel.addEventListener("input", function (event) {
-    if (tel.validity.typeMismatch) {
-      tel.setCustomValidity("Неправильно введен номер телефона!");
-    } else {
-      tel.setCustomValidity("");
-    }
-});
-
-psw.addEventListener("input", function (event) {
-    if (psw.validity.typeMismatch) {
-      psw.setCustomValidity("Неправильно введен пароль!");
-    } else {
-      psw.setCustomValidity("");
-    }
-});
-
-repeatPsw.addEventListener("input", function (event) {
-    if (repeatPsw.validity.typeMismatch) {
-      repeatPsw.setCustomValidity("Неправильно введен пароль!");
-    } else {
-      repeatPsw.setCustomValidity("");
-    }
-});*/

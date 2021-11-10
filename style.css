@@ -26,7 +26,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  margin: auto 5vw auto 5vw;
+  margin: auto 2vw auto 2vw;
 }
 
 .logo {
@@ -42,7 +42,12 @@ header {
     font-size: 32px;
     font-family: 'Noto Sans', sans-serif;
     padding-top: 0px;
-    margin: auto 0;
+    margin: auto 0 auto 5vw;
+}
+
+.logo-and-title {
+  display: flex;
+  justify-content: space-between;
 }
 
 .menu {
@@ -51,7 +56,7 @@ header {
 }
 .but {
   margin: 0;
-  padding: 0 2vh 0;
+  padding: 0 2vw 0;
   width: auto;
   font-size: 18px;
   font-weight: bold;
@@ -108,7 +113,7 @@ header {
 
 .modal__container {
   position: relative;
-  font-size: 24px;
+  font-size: 1.4rem;
   font-family: 'Open Sans', sans-serif;
   height: 100%;
   padding: 0 0 70px 0;
@@ -130,11 +135,66 @@ header {
   font-size: 18px;
 }
 
+.form_input_checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.form_input_checkbox + label::before {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+
+.form_input_checkbox + label::before {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #f85252;
+  border-radius: 0.25em;
+  margin-right: 0.5em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+.form_input_checkbox:checked + label::before {
+  border-color: #0b76ef;
+  background-color: #0b76ef;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+.form_input_checkbox:not(:disabled):not(:checked) + label:hover::before {
+  border-color: #b3d7ff;
+}
+
+.form_input_checkbox:not(:disabled):active + label::before {
+  background-color: #b3d7ff;
+  border-color: #b3d7ff;
+}
+
+.form_input_checkbox:focus + label::before {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form_input_checkbox:focus:not(:checked) + label::before {
+  border-color: #80bdff;
+}
+
+.form_input_checkbox._error label::before {
+  box-shadow: 0 0 0 1rem rgba(253, 0, 0, 1);
+}
+
 .form_input._error {
   background-color: tomato;
 }
 
 .form_input:required:valid {
+  background-color: white;
   border: 3px solid rgb(0, 253, 114);
 }
 
@@ -174,11 +234,11 @@ input[type=checkbox] {
   padding: 10px 20px;
   margin: 8px 0;
   border: none;
+  border-radius: 5px;
   position: absolute;
   right: 0;
   bottom: 0;
   height: 50px;
-  width: 50%;
   font-size: 24px;
   cursor: pointer;
 }
@@ -187,8 +247,28 @@ input[type=checkbox] {
   opacity: 0.8;
 }
 
+.modal__other-form {
+  background: transparent;
+  padding: 10px 20px;
+  margin: 8px 0;
+  border: none;
+  border-left: 3px ridge black;
+  border-right: 3px ridge black;
+  border-radius: 5px;
+  position: absolute;
+  height: 30px;
+  left: 0;
+  bottom: 0;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal__other-form:hover {
+  opacity: 0.8;
+}
+
 .modal__title {
-  font-size: 1.8rem;
+  font-size: 2.4rem;
   font-family: 'Noto Sans', sans-serif;
   text-transform: uppercase;
   margin: 0 0 15px;
@@ -201,33 +281,58 @@ main {
 }
 
 .main__container {
-  padding: 10px 0;
+  padding: 10px 10px 10px 10px;
   display: flex;
   justify-content: center;
-  /*min-height: calc(100vh - (85px + 75px));*/
   height: 100%;
   overflow: hidden;
   display: grid;
-  grid-gap: 10px;
-  /*grid-template-columns: repeat(auto-fit, 350px);*/
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  grid-template-rows: repeat(2, 500px);
-  /*rows сносим нахрен, и columns, а что закоменчено, декомментим*/
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, 350px);
+  grid-template-rows: repeat(auto-fit, 500px);
 }
 
 .main__container div {
-  /*height: 500px;*/
+  height: 500px;
   background-color:rgb(68, 187, 255);
   margin: 2px;
 }
 
+.ad {
+  font-size: 24px;
+  font-style: italic;
+  font-weight: bold;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ad-image img {
+  max-width: 100%;
+  max-height: 320px;
+  height: auto;
+}
+
 footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2vw;
   height: 70px;
   flex-shrink: 0;
   background: rgb(68, 187, 255);
   border-width: 2.5px;
   border-style: inset;
   border-color: blue;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+footer div {
+  color:rgb(240, 240, 255);
 }
 
 /* LiveReload*/

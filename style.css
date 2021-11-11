@@ -358,16 +358,33 @@ footer div {
     flex-direction: column;
     justify-content: space-around;
   }
+  .modal__content {
+    padding: 50px 50px 100px 50px;
+  }
+
+  .modal__submit-button {
+    padding: 10px 20px 20px 20px;
+    width: 100%;
+  }
+
+  .modal__other-form {
+    text-align: center;
+    margin: -52px 0;
+    right: 0;
+    bottom: 0;
+  }
 }
 
 @media screen and (max-width: 400px) {
   .title {
     display: none;
   }
+
   .but {
     font-size: 14px;
     padding: 5px 2vw;
   }
+
   .main__container {
     padding: 5px 5px 5px 5px;
     grid-gap: 10px;

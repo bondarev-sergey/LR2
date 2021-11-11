@@ -12,21 +12,21 @@ html, body {
 }
 
 header {
-    position: fixed;
+    padding: 0;
     width: 100%;
     background: rgb(68, 187, 255);
     border-width: 2.5px;
     border-style: inset;
     border-color: blue;
-    height: 80px;
 }
 
 .headerContent {
   height: 100%;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: stretch;
-  margin: auto 2vw auto 2vw;
+  margin: auto 1vw auto 1vw;
 }
 
 .logo {
@@ -56,7 +56,7 @@ header {
 }
 .but {
   margin: 0;
-  padding: 0 2vw 0;
+  padding: 0 2vw;
   width: auto;
   font-size: 18px;
   font-weight: bold;
@@ -275,7 +275,7 @@ input[type=checkbox] {
 }
 
 main {
-  margin: 85px 0 0 0;
+  margin: 0;
   flex-grow: 1;
   background: rgb(200, 235, 255);
 }
@@ -299,6 +299,7 @@ main {
 }
 
 .ad {
+  text-align: center;
   font-size: 24px;
   font-style: italic;
   font-weight: bold;
@@ -333,6 +334,64 @@ footer {
 
 footer div {
   color:rgb(240, 240, 255);
+}
+
+@media screen and (max-width: 800px) {
+  .headerContent {
+    margin: 0;
+    flex-direction: column;
+  }
+  .menu {
+    margin:0;
+    padding:0;
+    flex-direction: column;
+  }
+  .but {
+    margin: 0 auto;
+    padding: 15px 2vw;
+    width: min-content;
+  }
+  .logo-and-title {
+    justify-content: center;
+  }
+  footer {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .title {
+    display: none;
+  }
+  .but {
+    font-size: 14px;
+    padding: 5px 2vw;
+  }
+  .main__container {
+    padding: 5px 5px 5px 5px;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, 175px);
+    grid-template-rows: repeat(auto-fit, 250px);
+  }
+  
+  .main__container div {
+    height: 250px;
+    background-color:rgb(68, 187, 255);
+    margin: 2px;
+  }
+  
+  .ad {
+    font-size: 14px;
+    padding: 3px;
+  }
+  
+  .ad-image img {
+    max-height: 160px;
+  }
+  footer {
+    font-size: 14px;
+  }
 }
 
 /* LiveReload*/

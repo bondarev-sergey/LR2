@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (response.ok) {
                 let result = await response.json();
                 alert('Регистрация прошла успешно');
-                console.log(result.registration_form);
+                console.log(result.form);
                 registration_form.reset();
                 $('#modal-2').removeClass('modal_active');
                 $('body').removeClass('hidden');
@@ -80,12 +80,12 @@ document.addEventListener('DOMContentLoaded', function () {
             if (input.classList.contains('_email')){
                 if (emailTest(input)){
                     formAddError(input);
-                    alert('email');
+                    alert('Неверно введена почта. Пример правильной почты: ivanov@gmail.com');
                     error++;
                 }
             }else if (input.classList.contains('form_input_checkbox') && input.checked === false){
                 formAddError(input);
-                alert('checkbox');
+                alert('Чтобы зарегистрироваться, дайте свое согласие на обработку персональных данных');
                 error++;
             }else if (input.value === ''){
                     formAddError(input);
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }else if (input.classList.contains('_phone')){
                 if (phoneTest(input)){
                     formAddError(input);
-                    alert('Телефон должен соответствовать данному шаблону +79192569330');
+                    alert('Телефон должен быть введен таким образом: +79001111111 или 89045556677');
                     error++;
                 }
             }else if (input.classList.contains('_name')){
@@ -106,16 +106,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (passwordTest(input)){
                     formAddError(input);
                     alert('Пароль допускает только не менее 6 символов. Также должен содержать по ' +
-                        'крайней мере одной цифры, заглавной или строчной буквы и по крайней ' +
-                        'мере одного специального символа (символов, отличных от букв и цифр).');
+                        'крайней мере одной цифры, заглавной или строчной буквы.');
                     error++;
                 }
             } else if (input.classList.contains('_repeat-psw')) {
                 if (passwordTest(input)){
                     formAddError(input);
                     alert('Пароль допускает только не менее 6 символов. Также должен содержать по ' +
-                        'крайней мере одной цифры, заглавной или строчной буквы и по крайней ' +
-                        'мере одного специального символа (символов, отличных от букв и цифр).');
+                        'крайней мере одной цифры, заглавной или строчной буквы.');
                     error++;
                 }
             } else {
@@ -153,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (response.ok) {
                 let result = await response.json();
                 alert('Авторизация прошла успешно');
-                console.log(result.auth_form);
+                console.log(result.form);
                 auth_form.reset();
                 $('#modal-1').removeClass('modal_active');
                 $('body').removeClass('hidden');
